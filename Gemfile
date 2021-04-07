@@ -25,6 +25,9 @@ gem 'devise'
 # A devise extension which uses JWT tokens for user authentication
 gem 'devise-jwt'
 
+# A fast JSON:API serializer for Ruby
+gem 'jsonapi-serializer'
+
 # Rack Middleware for handling Cross-Origin Resource Sharing
 gem 'rack-cors'
 # Use Active Storage variant
