@@ -22,8 +22,11 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
+# A devise extension which uses JWT tokens for user authentication
 gem 'devise-jwt'
 
+# Rack Middleware for handling Cross-Origin Resource Sharing
+gem 'rack-cors'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
