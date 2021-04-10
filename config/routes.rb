@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: %w[show]
+    end
+  end
+
   devise_for :users,
     defaults: { format: :json },
     path_names: {
