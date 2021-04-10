@@ -318,4 +318,7 @@ Devise.setup do |config|
 	  ]
 	  jwt.expiration_time = 1.day.to_i
   end
+
+  # Setting for api only application
+  config.navigational_formats = []
 end
