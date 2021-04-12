@@ -101,7 +101,7 @@ const Header = props => {
                 return (
                   <Button key={menuItem}
                     variant="contained"
-                    onClick={() => handleButtonClick("/")}
+                    onClick={() => handleButtonClick(pageURL)}
                   >
                     {menuTitle}
                   </Button>
