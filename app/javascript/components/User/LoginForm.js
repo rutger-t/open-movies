@@ -3,14 +3,13 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,7 +33,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginForm = (props) => {
+  const [state, setState] = React.useState({
+    email: "",
+    password: ""
+  })
+
   const classes = useStyles();
+
+  const handleChange = (e) => {
+    e.preventDefault()
+    const value = e.target.value;
+    setState({
+      ...state,
+      [e.target.name]: value
+    });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const data = {
+      user: {
+        email: state.email,
+        password: state.password
+      }
+    };
+
+    Axios.post('users/login', data)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -46,7 +78,7 @@ const LoginForm = (props) => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -57,6 +89,8 @@ const LoginForm = (props) => {
             name="email"
             autoComplete="email"
             autoFocus
+            value={state.email}
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -68,10 +102,8 @@ const LoginForm = (props) => {
             type="password"
             id="password"
             autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            value={state.password}
+            onChange={handleChange}
           />
           <Button
             type="submit"
