@@ -30,6 +30,7 @@ const Header = props => {
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
+  const isLoggedIn = props.user;
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -41,21 +42,39 @@ const Header = props => {
   };
 
   const handleButtonClick = pageURL => {
-    history.push(pageURL);
+    if(pageURL == '/users/logout') {
+      localStorage.clear()
+      window.location = "/";
+    } else {
+      history.push(pageURL);
+    }
   };
 
-  const menuItems = [
-    {
-      menuTitle: "Login",
-      pageURL: "/login"
-    }
-  ];
+  const menuItems =
+    isLoggedIn ?
+      [
+        {
+          menuTitle: "Mypage",
+          pageURL: "/mypage"
+        },
+        {
+          menuTitle: "Logout",
+          pageURL: "/users/logout"
+        }
+      ]
+    :
+      [
+        {
+          menuTitle: "Login",
+          pageURL: "/login"
+        }
+      ];
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} onClick={() => handleMenuClick("/")}>
             OpenMovies
           </Typography>
           {isMobile ? (
@@ -84,10 +103,10 @@ const Header = props => {
                 open={open}
                 onClose={() => setAnchorEl(null)}
               >
-                {menuItems.map(menuItem => {
+                {menuItems.map((menuItem, index) => {
                   const { menuTitle, pageURL } = menuItem;
                   return (
-                    <MenuItem key={menuItem} onClick={() => handleMenuClick(pageURL)}>
+                    <MenuItem key={index} onClick={() => handleMenuClick(pageURL)}>
                       {menuTitle}
                     </MenuItem>
                   );
@@ -96,10 +115,10 @@ const Header = props => {
             </>
           ) : (
             <>
-              {menuItems.map(menuItem => {
+              {menuItems.map((menuItem, index) => {
                 const { menuTitle, pageURL } = menuItem;
                 return (
-                  <Button key={menuItem}
+                  <Button key={index}
                     variant="contained"
                     onClick={() => handleButtonClick(pageURL)}
                   >
