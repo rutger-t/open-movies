@@ -64,6 +64,7 @@ const LoginForm = (props) => {
         // TODO: use other method to store jwt token
         const jwt_token = res.headers.authorization.split(' ')[1]
         localStorage.setItem('token', jwt_token);
+        window.location = "/";
       })
       .catch(err => {
         console.log(err)
