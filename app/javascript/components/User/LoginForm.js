@@ -10,8 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Axios from 'axios';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
+  errorAlert: {
+    marginTop: '10px'
+  },
   paper: {
     marginBottom: theme.spacing(12),
     marginTop: theme.spacing(8),
@@ -37,6 +41,7 @@ const LoginForm = (props) => {
     email: "",
     password: ""
   })
+  const [alert, setAlert] = React.useState();
 
   const classes = useStyles();
 
@@ -68,12 +73,14 @@ const LoginForm = (props) => {
       })
       .catch(err => {
         console.log(err)
+        setAlert(err.response.data.error)
       })
   }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+      {alert ? <Alert severity='error' className={classes.errorAlert}>{alert}</Alert> : <></> }
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
