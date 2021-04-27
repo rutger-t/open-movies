@@ -4,6 +4,7 @@ import FrontPage from './FrontPage/FrontPage'
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
 import LoginForm from './User/LoginForm'
+import SignUpForm from './User/SignUpForm'
 import Axios from 'axios'
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={FrontPage}/>
         <Route exact path="/login" component={LoginForm}/>
+        <Route exact path="/signup" component={SignUpForm}/>
       </Switch>
       <Footer />
     </div>
