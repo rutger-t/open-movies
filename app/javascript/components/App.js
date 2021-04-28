@@ -3,13 +3,37 @@ import { Route, Switch } from 'react-router-dom'
 import FrontPage from './FrontPage/FrontPage'
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
+import LoginForm from './User/LoginForm'
+import SignUpForm from './User/SignUpForm'
+import Axios from 'axios'
 
 const App = () => {
+  const [user, setUser] = React.useState();
+
+  React.useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      }
+    };
+
+    Axios.get('/api/v1/users/profile', config).then(
+      res => {
+        setUser(res.data['data']['attributes'])
+      },
+      err => {
+        console.log(err)
+      }
+    );
+  }, []);
+
   return (
     <div>
-      <Header />
+      <Header user={user} />
       <Switch>
         <Route exact path="/" component={FrontPage}/>
+        <Route exact path="/login" component={LoginForm}/>
+        <Route exact path="/signup" component={SignUpForm}/>
       </Switch>
       <Footer />
     </div>

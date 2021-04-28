@@ -9,7 +9,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def find_user
-    @user = User.find(params[:id])
+    @user = current_user
   end
-
 end

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: %w[show]
+      get 'profile', to: 'users#show'
     end
   end
 
@@ -18,4 +19,6 @@ Rails.application.routes.draw do
       sessions: 'users/sessions',
       registrations: 'users/registrations'
     }
+
+    get '*path', to: 'pages#index', via: :all
 end
