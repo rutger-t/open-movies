@@ -27,6 +27,7 @@ gem 'devise-jwt'
 
 # A fast JSON:API serializer for Ruby
 gem 'jsonapi-serializer'
+gem 'rest-client'
 
 # Rexml is no longer default gem from ruby 3.0
 gem 'rexml', '~> 3.2', '>= 3.2.5'

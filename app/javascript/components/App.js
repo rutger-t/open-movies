@@ -5,19 +5,14 @@ import Header from './Header/Header'
 import Footer from './Footer/Footer'
 import LoginForm from './User/LoginForm'
 import SignUpForm from './User/SignUpForm'
+import SearchMovie from './Movie/SearchMovie'
 import Axios from 'axios'
 
 const App = () => {
   const [user, setUser] = React.useState();
 
   React.useEffect(() => {
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token')
-      }
-    };
-
-    Axios.get('/api/v1/users/profile', config).then(
+    Axios.get('/api/v1/users/profile').then(
       res => {
         setUser(res.data['data']['attributes'])
       },
@@ -34,6 +29,9 @@ const App = () => {
         <Route exact path="/" component={FrontPage}/>
         <Route exact path="/login" component={LoginForm}/>
         <Route exact path="/signup" component={SignUpForm}/>
+        <Route exact path="/search">
+          <SearchMovie user={user} />
+        </Route>
       </Switch>
       <Footer />
     </div>

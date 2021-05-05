@@ -37,8 +37,12 @@ const Header = props => {
   };
 
   const handleMenuClick = pageURL => {
-    history.push(pageURL);
-    setAnchorEl(null);
+    if(pageURL == '/users/logout') {
+      localStorage.clear()
+      window.location = "/";
+    } else {
+      history.push(pageURL);
+    }
   };
 
   const handleButtonClick = pageURL => {
@@ -54,8 +58,8 @@ const Header = props => {
     isLoggedIn ?
       [
         {
-          menuTitle: "Mypage",
-          pageURL: "/mypage"
+          menuTitle: "Search",
+          pageURL: "/search"
         },
         {
           menuTitle: "Logout",

@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: %w[show]
       get 'profile', to: 'users#show'
+
+      resources :reviews
+      get '/movie_search' => 'reviews#search'
     end
   end
 
