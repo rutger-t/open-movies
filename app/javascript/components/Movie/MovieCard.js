@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Axios from 'axios';
+import ReviewDialogue from './ReviewDialogue'
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -71,7 +72,7 @@ const MovieCard = (props) => {
                   {movie.overview}
                 </Typography>
               </CardContent>
-              <CardActions>
+              <CardActions style={{display: "block"}}>
                 { movie.already_reviewed ? (
                   <Button
                     variant="contained"
@@ -82,16 +83,7 @@ const MovieCard = (props) => {
                     Added Movie
                   </Button>
                 ) : (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{
-                      margin: '0 auto', display: "flex"
-                    }}
-                    onClick={() => addMovie(index)}
-                  >
-                    Add Movie
-                  </Button>
+                  <ReviewDialogue />
                 )}
               </CardActions>
             </Card>
