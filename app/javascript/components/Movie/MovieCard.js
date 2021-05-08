@@ -8,7 +8,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Axios from 'axios';
 import ReviewDialogue from './ReviewDialogue'
 
 const useStyles = makeStyles((theme) => ({
@@ -32,26 +31,6 @@ const useStyles = makeStyles((theme) => ({
 const MovieCard = (props) => {
   const [movies, setMovies] = React.useState(props.movieResults);
   const classes = useStyles();
-
-  const addMovie = (index) => {
-    const movieList = [...movies];
-
-    const review_data = {
-      review: {
-        user_id: props.user.id,
-        movie_id: movieList[index]['id'],
-      }
-    };
-
-    Axios.post('/api/v1/reviews', review_data)
-      .then(res => {
-        movieList[index]['already_reviewed'] = true
-        setMovies(movieList)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
@@ -83,7 +62,7 @@ const MovieCard = (props) => {
                     Added Movie
                   </Button>
                 ) : (
-                  <ReviewDialogue />
+                  <ReviewDialogue movie={movie} movies={movies} setMovies={setMovies} user={props.user} movieIndex={index} />
                 )}
               </CardActions>
             </Card>
