@@ -1,15 +1,16 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import StarRating from '../Review/StarRating';
 import Axios from 'axios';
 
 const FormDialog = (props) => {
   const [open, setOpen] = React.useState(false);
+  const [rating, setRating] = React.useState(0);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,6 +27,7 @@ const FormDialog = (props) => {
       review: {
         user_id: props.user.id,
         movie_id: movieList[index]['id'],
+        score: (rating * 20),
       }
     };
 
@@ -57,14 +59,7 @@ const FormDialog = (props) => {
           <DialogContentText>
             Rate the movie and see it on your page
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
+          <StarRating rating={rating} setRating={setRating} />
         </DialogContent>
         <DialogActions>
           <Button
@@ -81,7 +76,7 @@ const FormDialog = (props) => {
             }}
             color="primary"
           >
-            Subscribe
+            Confirm
           </Button>
         </DialogActions>
       </Dialog>
