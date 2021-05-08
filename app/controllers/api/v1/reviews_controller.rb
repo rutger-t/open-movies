@@ -3,7 +3,7 @@ class Api::V1::ReviewsController < ApplicationController
   require "the_movie_db"
 
   def search
-    response_json = TheMovieDb.new.get_movies(params['search_term'], current_user.id)
+    response_json = TheMovieDb.new.get_movies_by_search(params['search_term'], current_user)
     render json: response_json
   end
 
