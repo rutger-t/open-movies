@@ -58,6 +58,10 @@ const Header = props => {
     isLoggedIn ?
       [
         {
+          menuTitle: "MyPage",
+          pageURL: "/mypage"
+        },
+        {
           menuTitle: "Search",
           pageURL: "/search"
         },
