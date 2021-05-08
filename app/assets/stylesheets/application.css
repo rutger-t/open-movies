@@ -17,3 +17,12 @@
  body {
    margin: 0;
  }
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+input[type="radio"] {
+  display: none;
+}
