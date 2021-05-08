@@ -56,6 +56,7 @@ const LoginForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    localStorage.clear()
 
     const data = {
       user: {
