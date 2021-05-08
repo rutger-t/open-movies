@@ -6,6 +6,7 @@ import Footer from './Footer/Footer'
 import LoginForm from './User/LoginForm'
 import SignUpForm from './User/SignUpForm'
 import SearchMovie from './Movie/SearchMovie'
+import MyPage from './MyPage/MyPage'
 import Axios from 'axios'
 
 const App = () => {
@@ -29,6 +30,9 @@ const App = () => {
         <Route exact path="/" component={FrontPage}/>
         <Route exact path="/login" component={LoginForm}/>
         <Route exact path="/signup" component={SignUpForm}/>
+        <Route exact path="/mypage">
+          <MyPage user={user} />
+        </Route>
         <Route exact path="/search">
           <SearchMovie user={user} />
         </Route>
