@@ -8,6 +8,7 @@ class TheMovieDb
     movie_data['results'].map do |movie|
       next if movie['backdrop_path'] == nil
       movie['overview'] = movie['overview'].truncate(100)
+      movie['vote_average'] = (movie['vote_average']/2).round
       if Review.where(user_id: user.id, movie_id: movie['id']).present?
         movie['already_reviewed'] = true
       else
@@ -24,6 +25,7 @@ class TheMovieDb
     user_reviews.map do |review|
       movie = JSON.parse(client.get(search_by_id_endpoint(review.movie_id)))
       movie['overview'] = movie['overview'].truncate(100)
+      movie['vote_average'] = (movie['vote_average']/2).round
       movie['already_reviewed'] = true
       user_movies_list << movie
     end
