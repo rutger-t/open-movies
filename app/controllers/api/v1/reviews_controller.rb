@@ -7,6 +7,16 @@ class Api::V1::ReviewsController < ApplicationController
     render json: response_json
   end
 
+  def update
+    review = Review.find_by(movie_id: review_params['movie_id'])
+
+    if review.update(review_params)
+      render json: ReviewSerializer.new(review).serializable_hash.to_json
+    else
+      render json: { error: review.errors }, status: 422
+    end
+  end
+
   def create
     review = Review.new(review_params)
 
