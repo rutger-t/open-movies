@@ -45,8 +45,8 @@ const RateMovie = (props) => {
         const ratingValue = i + 1;
 
         return (
-         <label>
-           <input
+          <label key={i}>
+            <input
               type="radio"
               name="rating"
               value={ratingValue}

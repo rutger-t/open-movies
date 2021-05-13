@@ -14,6 +14,7 @@ const MovieRating = (props) => {
             className="star"
             color={ratingValue <= movie['vote_average'] ? "#ffc107" : "#e4e5e9"}
             size={25}
+            key={i}
           />
         );
       })}
