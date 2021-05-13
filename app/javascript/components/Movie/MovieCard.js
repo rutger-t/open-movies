@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,9 +7,10 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import ReviewDialogue from './ReviewDialogue'
+import MovieInfoDialog from './MovieInfoDialog'
 import MovieRating from '../Review/MovieRating'
+import RateMovie from '../Review/RateMovie'
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -50,23 +50,11 @@ const MovieCard = (props) => {
                 subheader={<MovieRating movies={movies} index={index} />}
               />
               <CardContent className={classes.cardContent}>
-                <Typography>
-                  {movie.overview}
-                </Typography>
               </CardContent>
               <CardActions style={{display: "block"}}>
-                { movie.already_reviewed ? (
-                  <Button
-                    variant="contained"
-                    style={{
-                      margin: '0 auto', display: "flex"
-                    }}
-                  >
-                    Added Movie
-                  </Button>
-                ) : (
-                  <ReviewDialogue movie={movie} movies={movies} setMovies={setMovies} user={props.user} movieIndex={index} />
-                )}
+                <MovieInfoDialog movie_id={movie.id} />
+                <Divider variant="middle" />
+                <RateMovie movies={movies} setMovies={setMovies} user={props.user} movieIndex={index} />
               </CardActions>
             </Card>
           </Grid>
