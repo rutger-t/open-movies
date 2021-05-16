@@ -58,24 +58,18 @@ const MovieInfoDialog = (props) => {
         More Info
       </Button>
       { dataReceived ? (
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle
-            id="form-dialog-title"
-          >
-            <Typography variant="h5" color="textPrimary" gutterBottom>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogContent>
+            <Typography variant="h4" color="textPrimary" gutterBottom>
               {movieDetails.original_title} ({movieDetails.release_year})
             </Typography>
-            <Typography variant="subtitle1" color="textPrimary" gutterBottom>
-              {movieDetails.release_date} ・ {movieDetails.runtime}m ・
+            {movieDetails.release_date} ・ {movieDetails.runtime}m ・
               {movieDetails.genres.map((genre, index) => {
                 return (
                   genre.name + (index < movieDetails.genres.length - 1 ? ', ' : '')
                 );
               })}
-            </Typography>
-          </DialogTitle>
-          <DialogContent>
-            <Typography variant="h6" color="textPrimary" gutterBottom>
+            <Typography style={{marginTop: '20px'}} variant="h6" color="textPrimary" gutterBottom>
               Overview
             </Typography>
             <Divider style={{marginBottom: '20px'}} />
