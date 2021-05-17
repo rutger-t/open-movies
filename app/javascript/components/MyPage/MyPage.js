@@ -2,11 +2,16 @@ import React from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { CircularProgress } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import Container from '@material-ui/core/Container';
 import MovieCard from '../Movie/MovieCard';
 import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
+  errorAlert: {
+    marginTop: '10px'
+  },
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -32,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MyPage = (props) => {
+  const [loading, setLoading] = React.useState(true);
+  const [alert, setAlert] = React.useState();
   const [userMovies, setUserMovies] = React.useState();
   const [displayResult, setDisplayResult] = React.useState(false);
   const classes = useStyles();
@@ -40,11 +47,14 @@ const MyPage = (props) => {
     setDisplayResult(false)
     Axios.get('/api/v1/review_list').then(
       res => {
+        setLoading(false)
         setUserMovies(res.data)
         setDisplayResult(true)
       },
       err => {
         console.log(err)
+        setLoading(false)
+        setAlert(err.message)
       }
     );
   }, []);
@@ -52,6 +62,7 @@ const MyPage = (props) => {
   return (
     <>
       <CssBaseline />
+      {alert ? <Alert severity='error' className={classes.errorAlert}>{alert}</Alert> : <></> }
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
@@ -63,7 +74,15 @@ const MyPage = (props) => {
             </Typography>
           </Container>
         </div>
-        { displayResult ? <MovieCard movieResults={userMovies} user={props.user} /> : null }
+        { loading ? (
+          <div style={{marginTop: "15px"}}>
+            <center>
+              <CircularProgress size={50} />
+            </center>
+          </div>
+        ) : (
+          displayResult ? <MovieCard movieResults={userMovies} user={props.user} /> : <div><center>No movies found</center></div>
+        )}
       </main>
     </>
   )
