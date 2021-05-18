@@ -46,7 +46,7 @@ class TheMovieDb
   end
 
   def api_key
-    '3d4de676a96cc5b57787a9478c635505'
+    Rails.application.credentials.tmdb_api_token
   end
 
   def base_api_url
