@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  let (:user) { create_user }
+  let(:user) { create_user }
 
   context 'When fetching a user' do
     before do

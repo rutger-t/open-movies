@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Registrations", type: :request do
-  let (:user) { build_user }
-  let (:existing_user) { create_user }
-  let (:signup_url) { '/users/signup' }
+  let(:user) { build_user }
+  let(:existing_user) { create_user }
+  let(:signup_url) { '/users/signup' }
 
   context 'When creating a new user' do
     before do

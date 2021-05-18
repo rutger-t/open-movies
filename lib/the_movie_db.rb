@@ -9,11 +9,11 @@ class TheMovieDb
       next if movie['backdrop_path'] == nil
 
       movie['overview'] = movie['overview'].truncate(100)
-      movie['vote_average'] = (movie['vote_average']/2).round
+      movie['vote_average'] = (movie['vote_average'] / 2).round
       movie['user_score'] = Review.where(user_id: user.id, movie_id: movie['id'])
       # returns nil or score of user
       score = Review.find_by(user_id: user.id, movie_id: movie['id'])&.score
-      movie['user_score'] = score.nil? ? nil : (score/20)
+      movie['user_score'] = score.nil? ? nil : (score / 20)
       filtered_movie_date << movie
     end
     filtered_movie_date
@@ -25,9 +25,9 @@ class TheMovieDb
     user_reviews.map do |review|
       movie = JSON.parse(client.get(search_by_id_endpoint(review.movie_id)))
       movie['overview'] = movie['overview'].truncate(100)
-      movie['vote_average'] = (movie['vote_average']/2).round
+      movie['vote_average'] = (movie['vote_average'] / 2).round
       score = Review.find_by(user_id: user.id, movie_id: movie['id'])&.score
-      movie['user_score'] = score.nil? ? nil : (score/20)
+      movie['user_score'] = score.nil? ? nil : (score / 20)
       user_movies_list << movie
     end
     user_movies_list
@@ -35,7 +35,7 @@ class TheMovieDb
 
   def get_movie_details(movie_id)
     movie = JSON.parse(client.get(search_by_id_endpoint(movie_id)))
-    movie['vote_average'] = (movie['vote_average']/2).round
+    movie['vote_average'] = (movie['vote_average'] / 2).round
     movie['release_year'] = movie['release_date'].scan(/\d{4}/).first
     movie
   end

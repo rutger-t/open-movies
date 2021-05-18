@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Sessions", type: :request do
-  let (:user) { create_user }
-  let (:login_url) { '/users/login' }
-  let (:logout_url) { '/users/logout' }
+  let(:user) { create_user }
+  let(:login_url) { '/users/login' }
+  let(:logout_url) { '/users/logout' }
 
   context 'When logging in' do
     before do
