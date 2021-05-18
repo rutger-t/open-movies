@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Registrations", type: :request do
-
   let (:user) { build_user }
   let (:existing_user) { create_user }
   let (:signup_url) { '/users/signup' }
@@ -43,5 +42,4 @@ RSpec.describe "Registrations", type: :request do
       expect(response.status).to eq(400)
     end
   end
-
 end

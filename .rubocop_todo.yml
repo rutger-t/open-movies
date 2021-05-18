@@ -62,8 +62,6 @@ Layout/EmptyLines:
 Layout/EmptyLinesAroundBlockBody:
   Exclude:
     - 'db/schema.rb'
-    - 'spec/requests/users/registrations_spec.rb'
-    - 'spec/requests/users/sessions_spec.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.

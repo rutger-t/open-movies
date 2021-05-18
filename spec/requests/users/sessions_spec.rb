@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Sessions", type: :request do
-
   let (:user) { create_user }
   let (:login_url) { '/users/login' }
   let (:logout_url) { '/users/logout' }
@@ -38,7 +37,6 @@ RSpec.describe "Sessions", type: :request do
     it 'returns 401' do
       expect(response.status).to eq(401)
     end
-
   end
 
   context 'When logging out' do
@@ -48,5 +46,4 @@ RSpec.describe "Sessions", type: :request do
       expect(response).to have_http_status(204)
     end
   end
-
 end
