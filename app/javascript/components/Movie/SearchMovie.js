@@ -7,6 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
+import Alert from '@material-ui/lab/Alert';
+import { CircularProgress } from '@material-ui/core';
 import Axios from 'axios';
 import MovieCard from './MovieCard'
 
@@ -20,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SearchMovie = props => {
+  const [loading, setLoading] = React.useState(false);
+  const [alert, setAlert] = React.useState();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [searchResults, setSearchResults] = React.useState([]);
   const [displayResult, setDisplayResult] = React.useState(false);
@@ -33,6 +37,7 @@ const SearchMovie = props => {
   const handleSubmit = (event) => {
     event.preventDefault()
     setDisplayResult(false)
+    setLoading(true)
 
     const data = {
       params: {
@@ -41,17 +46,21 @@ const SearchMovie = props => {
     };
     Axios.get('/api/v1/movie_search', data)
       .then(res => {
+        setLoading(false)
         setSearchResults(res.data)
         setDisplayResult(true)
       })
       .catch(err => {
+        setLoading(false)
         console.log(err)
+        setAlert(err.message)
       })
   }
 
   return (
     <>
       <CssBaseline />
+      {alert ? <Alert severity='error' className={classes.errorAlert}>{alert}</Alert> : <></> }
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
@@ -83,7 +92,15 @@ const SearchMovie = props => {
             />
           </Container>
         </div>
-        { displayResult ? <MovieCard movieResults={searchResults} user={props.user} /> : null }
+        { loading ? (
+          <div style={{marginTop: "15px"}}>
+            <center>
+              <CircularProgress size={50} />
+            </center>
+          </div>
+        ) : (
+          displayResult ? <MovieCard movieResults={searchResults} user={props.user} /> : null
+        )}
       </main>
     </>
   )
