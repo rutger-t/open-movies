@@ -22,5 +22,4 @@ class ApplicationController < ActionController::Base
       ]
     }, status: 404
   end
-
 end
