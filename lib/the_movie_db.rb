@@ -7,6 +7,7 @@ class TheMovieDb
     filtered_movie_date = []
     movie_data['results'].map do |movie|
       next if movie['backdrop_path'] == nil
+
       movie['overview'] = movie['overview'].truncate(100)
       movie['vote_average'] = (movie['vote_average']/2).round
       movie['user_score'] = Review.where(user_id: user.id, movie_id: movie['id'])
@@ -55,11 +56,13 @@ class TheMovieDb
 
   def search_by_keyword_endpoint(search_term)
     return if search_term.nil?
+
     "#{base_api_url}/search/movie?api_key=#{api_key}&query=#{search_term}&include_adult=false"
   end
 
   def search_by_id_endpoint(movie_id)
     return if movie_id.nil?
+
     "#{base_api_url}/movie/#{movie_id}?api_key=#{api_key}"
   end
 end

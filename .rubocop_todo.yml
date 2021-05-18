@@ -48,7 +48,6 @@ Layout/DotPosition:
 Layout/EmptyLineAfterGuardClause:
   Exclude:
     - 'bin/bundle'
-    - 'lib/the_movie_db.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
