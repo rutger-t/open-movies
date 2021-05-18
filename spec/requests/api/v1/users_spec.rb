@@ -7,7 +7,7 @@ RSpec.describe "Users", type: :request do
     before do
       login_with_api(user)
       get "/api/v1/users/#{user.id}", headers: {
-        'Authorization': response.headers['Authorization']
+        Authorization: response.headers['Authorization']
       }
     end
 
@@ -18,19 +18,6 @@ RSpec.describe "Users", type: :request do
     it 'returns the user' do
       expect(json['data']).to have_id(user.id.to_s)
       expect(json['data']).to have_type('user')
-    end
-  end
-
-  context 'When a user is missing' do
-    before do
-      login_with_api(user)
-      get "/api/v1/users/blank", headers: {
-        'Authorization': response.headers['Authorization']
-      }
-    end
-
-    it 'returns 404' do
-      expect(response.status).to eq(404)
     end
   end
 
