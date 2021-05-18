@@ -65,13 +65,6 @@ Layout/EmptyLinesAroundBlockBody:
 
 # Offense count: 2
 # Cop supports --auto-correct.
-# Configuration parameters: AllowForAlignment, AllowBeforeTrailingComments, ForceEqualSignAlignment.
-Layout/ExtraSpacing:
-  Exclude:
-    - 'lib/the_movie_db.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, IndentationWidth.
 # SupportedStyles: special_inside_parentheses, consistent, align_brackets
 Layout/FirstArrayElementIndentation:

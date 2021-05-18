@@ -12,7 +12,7 @@ class TheMovieDb
       movie['vote_average'] = (movie['vote_average']/2).round
       movie['user_score'] = Review.where(user_id: user.id, movie_id: movie['id'])
       # returns nil or score of user
-      score =  Review.find_by(user_id: user.id, movie_id: movie['id'])&.score
+      score = Review.find_by(user_id: user.id, movie_id: movie['id'])&.score
       movie['user_score'] = score.nil? ? nil : (score/20)
       filtered_movie_date << movie
     end
@@ -26,7 +26,7 @@ class TheMovieDb
       movie = JSON.parse(client.get(search_by_id_endpoint(review.movie_id)))
       movie['overview'] = movie['overview'].truncate(100)
       movie['vote_average'] = (movie['vote_average']/2).round
-      score =  Review.find_by(user_id: user.id, movie_id: movie['id'])&.score
+      score = Review.find_by(user_id: user.id, movie_id: movie['id'])&.score
       movie['user_score'] = score.nil? ? nil : (score/20)
       user_movies_list << movie
     end
