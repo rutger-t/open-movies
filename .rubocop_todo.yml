@@ -27,12 +27,6 @@ Layout/ArgumentAlignment:
     - 'config/routes.rb'
     - 'spec/support/user_helpers.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Layout/ClosingParenthesisIndentation:
-  Exclude:
-    - 'spec/support/user_helpers.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleAlignWith, Severity.
