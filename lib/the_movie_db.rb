@@ -6,7 +6,7 @@ class TheMovieDb
     movie_data = JSON.parse(client.get(search_by_keyword_endpoint(search_term)))
     filtered_movie_date = []
     movie_data['results'].map do |movie|
-      next if movie['backdrop_path'] == nil
+      next if movie['backdrop_path'].nil?
 
       movie['overview'] = movie['overview'].truncate(100)
       movie['vote_average'] = (movie['vote_average'] / 2).round

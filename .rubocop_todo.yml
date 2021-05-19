@@ -20,20 +20,10 @@ Bundler/OrderedGems:
 # SupportedStyles: with_first_argument, with_fixed_indentation
 Layout/ArgumentAlignment:
   Exclude:
-    - 'app/models/user.rb'
     - 'bin/webpack'
     - 'bin/webpack-dev-server'
     - 'config/initializers/cors.rb'
     - 'config/routes.rb'
-    - 'spec/support/user_helpers.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyleAlignWith, Severity.
-# SupportedStylesAlignWith: start_of_line, def
-Layout/DefEndAlignment:
-  Exclude:
-    - 'spec/support/user_helpers.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
@@ -79,7 +69,6 @@ Layout/IndentationConsistency:
   Exclude:
     - 'config/initializers/devise.rb'
     - 'config/routes.rb'
-    - 'spec/support/user_helpers.rb'
 
 # Offense count: 16
 # Cop supports --auto-correct.
@@ -89,7 +78,6 @@ Layout/IndentationStyle:
   Exclude:
     - 'config/initializers/cors.rb'
     - 'config/initializers/devise.rb'
-    - 'spec/support/user_helpers.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
@@ -110,7 +98,7 @@ Layout/MultilineOperationIndentation:
 # Offense count: 2
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
-  Max: 28
+  Max: 30
 
 # Offense count: 3
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
@@ -145,21 +133,8 @@ Style/BlockComments:
 # SupportedStyles: nested, compact
 Style/ClassAndModuleChildren:
   Exclude:
-    - 'app/controllers/api/v1/movies_controller.rb'
-    - 'app/controllers/api/v1/reviews_controller.rb'
-    - 'app/controllers/api/v1/users_controller.rb'
-    - 'app/controllers/users/registrations_controller.rb'
-    - 'app/controllers/users/sessions_controller.rb'
     - 'test/channels/application_cable/connection_test.rb'
     - 'test/test_helper.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: Keywords.
-# Keywords: TODO, FIXME, OPTIMIZE, HACK, REVIEW, NOTE
-Style/CommentAnnotation:
-  Exclude:
-    - 'app/controllers/application_controller.rb'
 
 # Offense count: 14
 # Configuration parameters: AllowedConstants.
@@ -213,14 +188,6 @@ Style/IfUnlessModifier:
 Style/InverseMethods:
   Exclude:
     - 'bin/yarn'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: predicate, comparison
-Style/NilComparison:
-  Exclude:
-    - 'lib/the_movie_db.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
