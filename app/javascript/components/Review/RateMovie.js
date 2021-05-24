@@ -18,7 +18,6 @@ const RateMovie = (props) => {
   const [rating, setRating] = React.useState(movieList[movieIndex]['user_score']);
 
   const addMovie = (clicked_rating) => {
-    const hasRating = rating
     setRating(clicked_rating)
 
     const review_data = {
@@ -29,7 +28,7 @@ const RateMovie = (props) => {
       }
     };
 
-    { hasRating ? (
+    { rating ? (
       Axios.patch('/api/v1/review_update', review_data)
         .then(res => {
           props.setMovies(movieList)
@@ -73,7 +72,16 @@ const RateMovie = (props) => {
           </label>
         );
       })}
-      <FaTrash className={classes.trashIcon} />
+      { rating ? (
+        <FaTrash
+          className={classes.trashIcon}
+          onClick={() => {
+            deleteReview();
+          }}
+        />
+      ) : (
+        null
+      )}
     </div>
   );
 }
