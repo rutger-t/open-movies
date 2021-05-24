@@ -1,8 +1,17 @@
 import React from 'react';
 import { FaStar } from  'react-icons/fa';
+import { FaTrash } from "react-icons/fa";
+import { makeStyles } from '@material-ui/core/styles';
 import Axios from 'axios';
 
+const useStyles = makeStyles((theme) => ({
+  trashIcon: {
+    marginBottom: '10px',
+  },
+}));
+
 const RateMovie = (props) => {
+  const classes = useStyles();
   const movieList = [...props.movies];
   const movieIndex = props.movieIndex;
   const [hover, setHover] = React.useState(null);
@@ -57,13 +66,14 @@ const RateMovie = (props) => {
             <FaStar
               className="star"
               color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
-              size={50}
+              size={48}
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(null)}
             />
           </label>
         );
       })}
+      <FaTrash className={classes.trashIcon} />
     </div>
   );
 }
