@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :reviews
       get '/movie_search' => 'reviews#search'
       patch '/review_update' => 'reviews#update'
+      post '/review_destroy' => 'reviews#destroy'
 
       get '/movie_info' => 'movies#show'
     end

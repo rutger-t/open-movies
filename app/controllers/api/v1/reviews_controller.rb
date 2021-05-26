@@ -2,6 +2,7 @@ module Api
   module V1
     class ReviewsController < ApplicationController
       before_action :authenticate_user!
+      before_action :set_review, only: [:update, :destroy]
       require "the_movie_db"
 
       def search
@@ -10,12 +11,10 @@ module Api
       end
 
       def update
-        review = Review.find_by(movie_id: review_params['movie_id'])
-
-        if review.update(review_params)
-          render json: ReviewSerializer.new(review).serializable_hash.to_json
+        if @review.update(review_params)
+          render json: ReviewSerializer.new(@review).serializable_hash.to_json
         else
-          render json: { error: review.errors }, status: 422
+          render json: { error: @review.errors }, status: 422
         end
       end
 
@@ -29,7 +28,19 @@ module Api
         end
       end
 
+      def destroy
+        if @review.destroy
+          head :no_content
+        else
+          render json: { error: @review.errors }, status: 422
+        end
+      end
+
       private
+
+      def set_review
+        @review = Review.find_by(movie_id: review_params['movie_id'], user_id: current_user.id)
+      end
 
       def review_params
         params.require(:review).permit(:score, :movie_id, :user_id)
