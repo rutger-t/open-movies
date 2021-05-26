@@ -47,6 +47,23 @@ const RateMovie = (props) => {
     )}
   }
 
+  const deleteReview = () => {
+    const review_data = {
+      review: {
+        user_id: props.user.id,
+        movie_id: movieList[movieIndex]['id'],
+      }
+    };
+
+    Axios.post('/api/v1/review_destroy', review_data)
+    .then(res => {
+      setRating(0)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   return (
     <div>
       {[...Array(5)].map((star, i) => {
