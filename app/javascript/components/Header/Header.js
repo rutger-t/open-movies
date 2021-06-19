@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Header = props => {
-  const { history } = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -41,16 +40,7 @@ const Header = props => {
       localStorage.clear()
       window.location = "/";
     } else {
-      history.push(pageURL);
-    }
-  };
-
-  const handleButtonClick = pageURL => {
-    if(pageURL == '/users/logout') {
-      localStorage.clear()
-      window.location = "/";
-    } else {
-      history.push(pageURL);
+      window.location = pageURL;
     }
   };
 
@@ -132,7 +122,7 @@ const Header = props => {
                 return (
                   <Button key={index}
                     variant="contained"
-                    onClick={() => handleButtonClick(pageURL)}
+                    onClick={() => handleMenuClick(pageURL)}
                   >
                     {menuTitle}
                   </Button>
