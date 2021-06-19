@@ -67,7 +67,6 @@ const LoginForm = (props) => {
 
     Axios.post('users/login', data)
       .then(res => {
-        // TODO: use other method to store jwt token
         const jwt_token = res.headers.authorization.split(' ')[1]
         localStorage.setItem('token', jwt_token);
         window.location = "/";

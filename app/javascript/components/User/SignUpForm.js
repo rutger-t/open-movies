@@ -66,10 +66,16 @@ const SignUpForm = (props) => {
 
     Axios.post('users/signup', data)
       .then(res => {
-        // TODO: use other method to store jwt token
-        // const jwt_token = res.headers.authorization.split(' ')[1]
-        // localStorage.setItem('token', jwt_token);
-        window.location = "/login";
+        Axios.post('users/login', data)
+        .then(res => {
+          const jwt_token = res.headers.authorization.split(' ')[1]
+          localStorage.setItem('token', jwt_token);
+          window.location = "/";
+        })
+        .catch(err => {
+          console.log(err)
+          setAlert(err.response.data.error)
+        })
       })
       .catch(err => {
         console.log(err)
