@@ -105,7 +105,6 @@ const FrontPage = props => {
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               OpenMovies allows you to create a list of your favorite movies and rate them.
-              The only thing you have to do is creat an account and you can get started!
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
