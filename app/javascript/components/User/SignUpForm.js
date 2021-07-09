@@ -70,7 +70,7 @@ const SignUpForm = (props) => {
         .then(res => {
           const jwt_token = res.headers.authorization.split(' ')[1]
           localStorage.setItem('token', jwt_token);
-          window.location = "/mypage";
+          window.location = "/search";
         })
         .catch(err => {
           console.log(err)
